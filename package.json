@@ -17,7 +17,7 @@
     "node",
     "js"
   ],
-  "author": "EHURIAH CHUKWUDIKE GODSPOWER",
+  "author": "raybaba",
   "license": "ISC",
   "dependencies": {
     "bcryptjs": "^2.4.3",
