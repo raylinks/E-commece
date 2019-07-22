@@ -10,6 +10,7 @@ const mongoose = require('mongoose');
 
 
 const userRoutes  = require('./api/routes/user');
+console.log(userRoutes);
 const groupRoute = require('./api/routes/group');
 const categoryRoute = require('./api/routes/category');
 const productRoute = require('./api/routes/product');
@@ -17,7 +18,7 @@ const contactRoute = require('./api/routes/contact');
 const orderRoute = require('./api/routes/order');
 
 mongoose.connect(process.env.MONGODB_URI ||  'mongodb://localhost:27017/meeks', 
-{useNewUrlParser: true, useCreateIndex: true}).then((res)=>{
+{useNewUrlParser: true}).then((res)=>{
     console.log("coonect success")
 }).catch(()=>{
     console.log("connect fail");
@@ -69,7 +70,7 @@ app.use('/orders', orderRoute);
 
 
 app.use(function (req, res, next) {
-    const error = new Error('Not Found');
+    const error = new Error('Notttt Found');
     error.status = 404;
     next(error);
  });
