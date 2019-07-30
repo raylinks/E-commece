@@ -10,7 +10,7 @@ const mongoose = require('mongoose');
 
 
 const userRoutes  = require('./api/routes/user');
-console.log(userRoutes);
+// console.log(userRoutes);
 const groupRoute = require('./api/routes/group');
 const categoryRoute = require('./api/routes/category');
 const productRoute = require('./api/routes/product');
@@ -70,7 +70,7 @@ app.use('/orders', orderRoute);
 
 
 app.use(function (req, res, next) {
-    const error = new Error('Notttt Found');
+    const error = new Error('error Found');
     error.status = 404;
     next(error);
  });
