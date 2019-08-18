@@ -126,7 +126,7 @@ router.post('/login',  (req,res,next) => {
                     phone: user.phone,
                     is_admin: user.is_admin
                 };
-                let token = jwt.sign(payload, process.env.JWT_KEY,{
+                const token = jwt.sign(payload, process.env.JWT_KEY,{
                     expiresIn:"1h"
                 });
                 return res.status(200).json({
