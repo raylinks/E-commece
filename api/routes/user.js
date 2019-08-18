@@ -10,6 +10,8 @@ const crypto = require('crypto');
 const nodemailer = require('nodemailer');
 const Password = require('../models/password');
 
+"use strict";
+
 router.post('/admin-signup', function (req,res,next) {
     if (!req.body.full_name || !req.body.email || !req.body.password || !req.body.country || !req.body.state || !req.body.city || !req.body.address || !req.body.phone) {
         res.status(422).json({success: false, msg: 'All Fields are required'});
