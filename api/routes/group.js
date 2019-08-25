@@ -18,7 +18,7 @@ router.post('/add', CheckAuth, (req, res, next) => {
                 name: result.name,
                 request: {
                     type: "GET",
-                    url: 'http://localhost:3000/groups/' + result._id
+                    url: 'https://raybaba.com.ng/groups/' + result._id
                 }
             }
             });
@@ -47,7 +47,7 @@ router.get('/', (req, res, next) => {
                         name: doc.name,
                         request: {
                             type: 'GET',
-                            url: 'http://localhost:3000/groups/' + doc._id
+                            url: 'https://raybaba.com.ng/groups/' + doc._id
                         }
                     }
                 })
@@ -73,7 +73,7 @@ router.get('/:groupId', CheckAuth, (req, res, next) => {
                 group: doc,
                 request: {
                     type: 'GET',
-                    url: 'http://localhost:3000/groups'
+                    url: 'https://raybaba.com.ng/groups'
                 }
             });
         }

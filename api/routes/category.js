@@ -30,7 +30,7 @@ router.post('/add', CheckAuth, (req, res, next) => {
                     groupId: result.groupId,
                     request: {
                         type: 'GET',
-                        url: 'http://localhost:3000/categories'
+                        url: 'https://raybaba.com.ng/categories'
                     }
                 }
             });
