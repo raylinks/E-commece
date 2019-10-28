@@ -1,4 +1,6 @@
 const jwt = require('jsonwebtoken');
+
+process.env.JWT_KEY = '111118765'
 module.exports = (req, res, next) => {
     try {
         const token = req.headers.authorization.split(" ")[1];
@@ -7,7 +9,7 @@ module.exports = (req, res, next) => {
         next(); 
     } catch (err) {
         return res.status(401).json({
-            message: 'Not Allowed'
+            message: 'Not Allowed/ You are not autorized'
         });
     }
 };

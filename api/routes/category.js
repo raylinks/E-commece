@@ -7,8 +7,10 @@ const CheckAuth = require('../middleware/check-auth');
 
 
 
-router.post('/add', CheckAuth, (req, res, next) => {
-    const _id = req.body.groupId;
+//router.post('/add', CheckAuth, (req, res, next) => {
+router.post('/add', (req, res, next) => {
+
+const _id = req.body.groupId;
     Group.findById(_id).select('_id').then( function (group)  {
         if(!group) {
             res.status(404).json('Group Not Found');

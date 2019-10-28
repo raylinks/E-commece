@@ -4,7 +4,7 @@ const Mongoose = require('mongoose')
 const Group = require('../models/group');
 const CheckAuth = require('../middleware/check-auth');
 
-router.post('/add', CheckAuth, (req, res, next) => {
+router.post('/add',  (req, res, next) => {
     const group = new Group({
         _id: Mongoose.Types.ObjectId(),
         name: req.body.name

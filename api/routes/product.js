@@ -33,14 +33,20 @@ const upload = multer({storage: storage, fileFilter: fileFilter, limits: {
 });
 
 cloudinary.config(process.env.CLOUDINARY_URL);
+//cloudinary.config({
+//    cloud_name:'droftpqoh',
+//     api_key:'718973513931596',
+//     api_secret:'D7ykorIDlYkI9VkWImBqKKLztvc'
+// });
+
+ 
 
 
 
-
-
-router.post('/add', CheckAuth, upload.single('image'), (req,res, next) => {
+//router.post('/add', CheckAuth, upload.single('image'), (req,res, next) => {
+    router.post('/add',  upload.single('image'), (req,res, next) => {
     cloudinary.uploader.upload(req.body.image, function(result) {
-       
+      
     var image = req.body.image;
     image = result.secure_url;
     const groupId = req.body.groupId;

@@ -11,12 +11,18 @@ const nodemailer = require('nodemailer');
 const Password = require('../models/password');
 
 "use strict";
+process.env.SECRET_KEY = 'secret'
 
 router.post('/admin-signup', function (req,res,next) {
     if (!req.body.full_name || !req.body.email || !req.body.password || !req.body.country || !req.body.state || !req.body.city || !req.body.address || !req.body.phone) {
         res.status(422).json({success: false, msg: 'All Fields are required'});
     } else{
         User.find({email: req.body.email}, function(err, user) {
+            if(err){
+                return res.status(500).json({ 
+                    msg:"email exist"
+                });
+            };
             if(user.length > 1){
                 return res.status(409).json({
                     msg: 'Mail Exists'
@@ -57,8 +63,10 @@ router.post('/admin-signup', function (req,res,next) {
                                             host: "smtp.mailtrap.io",
                                             port: 2525,
                                             auth: { 
-                                                user: '3348b04943bfb0', 
-                                                pass: '01c1ffe9a3b4bb' 
+                                                user: '9c301e9bfbf54e', 
+                                                pass: '	1e1b635adb4ee8'
+
+                                                
                                                        } 
                                             });
                                             const mailOptions = { 
@@ -97,6 +105,7 @@ router.post('/login',  (req,res,next) => {
         res.status(422).json({success: false, msg: 'All Fields are required'});
     } else {
   User.findOne({email: req.body.email}, function (err, user) {
+      
       if(user < 1)
         return res.status(401).json(
            'Email Doesnt Exist'
@@ -126,9 +135,10 @@ router.post('/login',  (req,res,next) => {
                     phone: user.phone,
                     is_admin: user.is_admin
                 };
-                const token = jwt.sign(payload, process.env.JWT_KEY,{
+                const token = jwt.sign(payload, process.env.SECRET_KEY,{
                     expiresIn:"1h"
                 });
+                
                 return res.status(200).json({
                     message: 'Auth Successful',
                     token: token,
@@ -147,7 +157,7 @@ router.post('/login',  (req,res,next) => {
 
 router.patch('/update/:userId' , (req,res,next)=> {
     const id = req.params.userId;
-    console.log(id);
+    
     // const updateOps = {};
     // for (const ops of req.body){
     //     updateOps[ops.propName] = ops.value
