@@ -5,6 +5,7 @@ const app = express();
 const morgan = require('morgan');
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
+
 require('dotenv').config();
 
 
@@ -16,10 +17,11 @@ const categoryRoute = require('./api/routes/category');
 const productRoute = require('./api/routes/product');
 const contactRoute = require('./api/routes/contact');
 const orderRoute = require('./api/routes/order');
+const config =require('./api/config/config')
 
-mongoose.connect(process.env.MONGODB_URI ||  'mongodb://localhost:27017/meeks', 
+mongoose.connect(config.mongo_uri ||  'mongodb://localhost:27017/meeks', 
 {useNewUrlParser: true}).then((res)=>{
-    console.log("coonect success")
+    console.log("connect success")
 }).catch(()=>{
     console.log("connect fail");
 });

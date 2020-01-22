@@ -3,6 +3,7 @@ const express = require("express");
 const mongoose = require('mongoose');
 let nodemailer = require("nodemailer");
 const Order = require('./api/models/order');
+const config =require('./api/config/config')
 
 app = express();
 
@@ -39,7 +40,7 @@ app = express();
 cron.schedule("*/2 * * * *", function() {
     console.log("---------------------");
     console.log("Running Cron Job");
-    mongoose.connect(process.env.MONGODB_URI ||  'mongodb://localhost:27017/meeks', {useNewUrlParser: true});
+    mongoose.connect(config.mongo_uri  ||  config.mongodb , {useNewUrlParser: true});
     Order.find()
     .where('status').equals('CANCELLED')
     .limit(1)
@@ -101,7 +102,7 @@ cron.schedule("*/2 * * * *", function() {
         //    console.log(uniqueId);
 
             if(status === "CANCELLED"){
-                mongoose.connect(process.env.MONGODB_URI ||  'mongodb://localhost:27017/meeks', {useNewUrlParser: true});
+                mongoose.connect(config.mongodb_uri ||  config.mongodb, {useNewUrlParser: true});
    Order.remove({_id: id}).exec().then(function (result) {
                     if(result){
                             const mailOptions = { 
@@ -125,7 +126,7 @@ cron.schedule("*/2 * * * *", function() {
                 });  
             }
         }else{
-            console.log('Not found')
+           // console.log('Not found')
         }
     })
     .catch(err => {

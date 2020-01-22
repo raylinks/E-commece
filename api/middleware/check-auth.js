@@ -1,10 +1,10 @@
 const jwt = require('jsonwebtoken');
 
-process.env.JWT_KEY = '111118765'
+
 module.exports = (req, res, next) => {
     try {
         const token = req.headers.authorization.split(" ")[1];
-        const decoded = jwt.verify(token, process.env.JWT_KEY);  
+        const decoded = jwt.verify(token, config.jwtSecret);  
         req.userData = decoded;
         next(); 
     } catch (err) {

@@ -7,6 +7,7 @@ const Group = require('../models/group');
 const CheckAuth = require('../middleware/check-auth');
 const multer = require('multer');
 const cloudinary = require('cloudinary');
+const config =require('../config/config');
 
 
  const storage = multer.diskStorage({
@@ -32,7 +33,7 @@ const upload = multer({storage: storage, fileFilter: fileFilter, limits: {
 }
 });
 
-cloudinary.config(process.env.CLOUDINARY_URL);
+cloudinary.config(config.cloudinary_url);
 //cloudinary.config({
 //    cloud_name:'droftpqoh',
 //     api_key:'718973513931596',

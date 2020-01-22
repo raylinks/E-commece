@@ -9,9 +9,10 @@ const CheckAuth = require('../middleware/check-auth');
 const crypto = require('crypto');
 const nodemailer = require('nodemailer');
 const Password = require('../models/password');
+const config =require('../config/config');
 
 "use strict";
-process.env.SECRET_KEY = 'secret'
+
 
 router.post('/admin-signup', function (req,res,next) {
     if (!req.body.full_name || !req.body.email || !req.body.password || !req.body.country || !req.body.state || !req.body.city || !req.body.address || !req.body.phone) {
@@ -135,8 +136,8 @@ router.post('/login',  (req,res,next) => {
                     phone: user.phone,
                     is_admin: user.is_admin
                 };
-                const token = jwt.sign(payload, process.env.SECRET_KEY,{
-                    expiresIn:"1h"
+                const token = jwt.sign(payload, config.jwtSecret  ,{
+                    expiresIn:config.jwt_expiration
                 });
                 
                 return res.status(200).json({
