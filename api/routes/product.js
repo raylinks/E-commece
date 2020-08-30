@@ -116,6 +116,7 @@ cloudinary.config(config.cloudinary_url);
 
 //get all products
 router.get('/', (req, res, next) => {
+   // console.log('i got here1');
     Product
     .find()
     .select('_id groupId categoryId price quantity description image name')
